@@ -1,7 +1,9 @@
 <% if segment_enabled? %>
   <script>
-    if (typeof analytics !== 'undefined') {
-      analytics.page();
-    }
+    window.addEventListener('turbolinks:load', function() {
+      if (typeof analytics !== 'undefined') {
+        analytics.page();
+      }
+    });
   </script>
 <% end %>

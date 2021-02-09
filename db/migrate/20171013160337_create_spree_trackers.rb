@@ -1,4 +1,4 @@
-class CreateSpreeTrackers < SpreeExtension::Migration[4.2]
+class CreateSpreeTrackers < SolidusSupport::Migration[4.2]
   def change
     if table_exists?(:spree_trackers)
       add_index :spree_trackers, :active unless index_exists?(:spree_trackers, :active)

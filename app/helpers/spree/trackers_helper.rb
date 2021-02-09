@@ -4,7 +4,7 @@ module Spree
       cache_key = [
         'spree-segment-product',
         I18n.locale,
-        current_currency,
+        current_pricing_options,
         product.cache_key_with_version
       ].compact.join('/')
 
@@ -12,17 +12,17 @@ module Spree
         {
           product_id: product.id,
           sku: product.sku,
-          category: product.category&.name,
+          category: product.taxons.pluck(:name).first,
           name: product.name,
-          brand: product.brand&.name,
-          price: product.price_in(current_currency).amount&.to_f,
-          currency: current_currency,
+          brand: Spree::Store.default.name,
+          price: product.price_for(current_pricing_options).try(:to_d),
+          currency: current_pricing_options.currency,
           url: spree.product_url(product)
         }
       end
 
       product_hash.tap do |hash|
-        hash[:image_url] = default_image_for_product_or_variant(product)
+        hash[:image_url] = default_image_for_product_or_variant(product)&.attachment&.url
       end.merge(optional).to_json.html_safe
     end
 
@@ -32,7 +32,7 @@ module Spree
       cache_key = [
         'spree-ga-line-item',
         I18n.locale,
-        current_currency,
+        current_pricing_options,
         line_item.cache_key_with_version,
         variant.cache_key_with_version
       ].compact.join('/')
@@ -42,11 +42,11 @@ module Spree
         {
           id: variant.sku,
           name: variant.name,
-          category: product.category&.name,
+          category: product.taxons.pluck(:name).first,
           variant: variant.options_text,
-          brand: product.brand&.name,
+          brand: Spree::Store.default.name,
           quantity: line_item.quantity,
-          price: variant.price_in(current_currency).amount&.to_f
+          price: variant.price_for(current_pricing_options).try(:to_d)
         }.to_json.html_safe
       end
     end
@@ -81,6 +81,32 @@ module Spree
 
     def ga_enabled?
       ga_tracker.present?
+    end
+
+    def default_image_for_product(product)
+      if product.images.any?
+        product.images.first
+      elsif product.master.images.any?
+        product.master.images.first
+      elsif product.variant_images.any?
+        product.variant_images.first
+      end
+    end
+
+    def default_image_for_product_or_variant(product_or_variant)
+      cache_key = "spree/default-image/#{product_or_variant.cache_key_with_version}"
+
+      Rails.cache.fetch(cache_key) do
+        if product_or_variant.is_a?(Spree::Product)
+          default_image_for_product(product_or_variant)
+        elsif product_or_variant.is_a?(Spree::Variant)
+          if product_or_variant.images.any?
+            product_or_variant.images.first
+          else
+            default_image_for_product(product_or_variant.product)
+          end
+        end
+      end
     end
   end
 end

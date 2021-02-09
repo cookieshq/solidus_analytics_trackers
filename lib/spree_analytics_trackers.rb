@@ -1,5 +1,5 @@
-require 'spree_core'
-require 'spree_extension'
+require 'solidus_core'
+require 'solidus_support'
 require 'spree_analytics_trackers/engine'
 require 'spree_analytics_trackers/version'
 require 'deface'

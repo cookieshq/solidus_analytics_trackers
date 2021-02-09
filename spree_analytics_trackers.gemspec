@@ -21,11 +21,12 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  spree_version = '>= 4.1.0', '< 5.0'
-  s.add_dependency 'spree_core', spree_version
-  s.add_dependency 'spree_backend', spree_version
-  s.add_dependency 'spree_extension'
+
+  solidus_version = [">= 2.6", "< 4"]
   s.add_dependency 'deface', '~> 1.0'
+  s.add_dependency "solidus_core", solidus_version
+  s.add_dependency 'solidus_backend', solidus_version
+  s.add_dependency "solidus_support", "~> 0.5"
 
   s.add_development_dependency 'spree_dev_tools'
 end
