@@ -5,12 +5,12 @@ module SpreeAnalyticsTrackers
 
       def serialize_resource(resource, options = {})
         {
-          order_id: resource.number.to_s,
-          total: resource.total&.to_f,
-          shipping: resource.shipment_total&.to_f,
-          tax: resource.additional_tax_total&.to_f,
-          discount: resource.promo_total&.to_f,
-          coupon: resource.promo_code,
+          order_id: resource.number,
+          total: resource.total,
+          shipping: resource.shipment_total,
+          tax: resource.additional_tax_total,
+          discount: resource.promo_total,
+          coupon: resource.coupon_code,
           currency: resource.currency,
           products: resource.line_items.map { |li| serialize_line_item(li) }
         }
@@ -20,10 +20,10 @@ module SpreeAnalyticsTrackers
 
       def serialize_line_item(line_item)
         {
-          product_id: line_item.product_id&.to_s,
-          sku: line_item.sku&.to_s,
+          product_id: line_item.product.id,
+          sku: line_item.sku,
           name: line_item.name,
-          price: line_item.price&.to_f,
+          price: line_item.price,
           quantity: line_item.quantity
         }
       end

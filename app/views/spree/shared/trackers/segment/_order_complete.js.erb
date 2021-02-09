@@ -1,11 +1,9 @@
 <% if segment_enabled? && @order.present? && order_just_completed?(@order) %>
   <% order_json = SpreeAnalyticsTrackers::Segment::OrderPresenter.new(@order).to_json %>
   <script>
-    window.addEventListener('turbolinks:load', function() {
-      if (typeof analytics !== 'undefined') {
-        analytics.page('Order Completed', <%= order_json.html_safe %>);
-        analytics.track('Order Completed', <%= order_json.html_safe %>);
-      }
-    });
+    if (typeof analytics !== 'undefined') {
+      analytics.page('Order Completed', <%= order_json.html_safe %>);
+      analytics.track('Order Completed', <%= order_json.html_safe %>);
+    }
   </script>
 <% end %>
