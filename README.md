@@ -1,4 +1,4 @@
-# Spree Analytics Trackers
+# Solidus Analytics Trackers
 
 [![Build Status](https://travis-ci.org/spree-contrib/spree_analytics_trackers.svg?branch=master)](https://travis-ci.org/spree-contrib/spree_analytics_trackers)
 
@@ -21,7 +21,7 @@ No additional development required.
 1. Add this extension to your Gemfile with this line:
 
   ```ruby
-  gem 'spree_analytics_trackers', '~> 2.0'
+  gem 'solidus_analytics_trackers', github: 'cookieshq/solidus_analytics_trackers'
   ```
 
 2. Install the gem using Bundler:
