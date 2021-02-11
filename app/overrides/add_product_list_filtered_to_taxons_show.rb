@@ -1,4 +1,4 @@
-if SpreeAnalyticsTrackers.configuration.use_deface
+if SpreeAnalyticsTrackers.configuration.deface_frontend
   Deface::Override.new(
     virtual_path: 'spree/taxons/show',
     name: 'add_product_list_filtered_to_taxons_show',

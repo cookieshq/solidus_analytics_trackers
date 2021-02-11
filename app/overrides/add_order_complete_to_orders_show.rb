@@ -1,4 +1,4 @@
-if SpreeAnalyticsTrackers.configuration.use_deface
+if SpreeAnalyticsTrackers.configuration.deface_frontend
   Deface::Override.new(
     virtual_path: 'spree/orders/show',
     name: 'add_order_complete_to_orders_show',

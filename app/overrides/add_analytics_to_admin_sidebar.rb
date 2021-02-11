@@ -1,4 +1,4 @@
-if SpreeAnalyticsTrackers.configuration.use_deface
+if SpreeAnalyticsTrackers.configuration.deface_backend
   Deface::Override.new(
     virtual_path: 'spree/admin/shared/_settings_sub_menu',
     name: 'add_analytics_to_admin_sidebar',

@@ -1,9 +1,10 @@
 module SpreeAnalyticsTrackers
   class Configuration
-    attr_accessor :use_deface
+    attr_accessor :deface_backend, :deface_frontend
 
     def initialize
-      @use_deface = true
+      @deface_backend = true
+      @deface_frontend = true
     end
   end
 end

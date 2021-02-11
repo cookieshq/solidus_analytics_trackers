@@ -1,4 +1,4 @@
-if SpreeAnalyticsTrackers.configuration.use_deface
+if SpreeAnalyticsTrackers.configuration.deface_frontend
   Deface::Override.new(
     virtual_path: 'spree/layouts/spree_application',
     name: 'add_google_analytics_page_viewed_to_spree_application',

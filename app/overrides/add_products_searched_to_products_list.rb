@@ -1,4 +1,4 @@
-if SpreeAnalyticsTrackers.configuration.use_deface
+if SpreeAnalyticsTrackers.configuration.deface_frontend
   Deface::Override.new(
     virtual_path: 'spree/products/index',
     name: 'add_products_searched_to_products_list',

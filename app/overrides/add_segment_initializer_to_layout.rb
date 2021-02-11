@@ -1,4 +1,4 @@
-if SpreeAnalyticsTrackers.configuration.use_deface
+if SpreeAnalyticsTrackers.configuration.deface_frontend
   Deface::Override.new(
     virtual_path: 'spree/layouts/spree_application',
     name: 'add_segment_initializer_to_head',
