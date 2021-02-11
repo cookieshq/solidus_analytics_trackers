@@ -5,7 +5,7 @@ require 'spree_analytics_trackers/version'
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_analytics_trackers'
+  s.name        = 'solidus_analytics_trackers'
   s.version     = SpreeAnalyticsTrackers.version
   s.summary     = 'Adds analytics trackers functionality to Spree'
   s.description = 'Supports Google Analytics '
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   s.author    = 'Spark Solutions'
   s.email     = 'we@sparksolutions.co'
-  s.homepage  = 'https://github.com/spree-contrib/spree_analytics_trackers'
+  s.homepage  = 'https://https://github.com/cookieshq/solidus_analytics_trackers'
   s.license = 'BSD-3-Clause'
 
   s.files        = `git ls-files`.split("\n")
