@@ -1,6 +1,8 @@
-# Deface::Override.new(
-#   virtual_path: 'spree/orders/edit',
-#   name: 'add_cart_viewed_to_orders_edit',
-#   insert_bottom: '[data-hook="cart_container"]',
-#   partial: 'spree/shared/trackers/segment/cart_viewed.js'
-# )
+if SpreeAnalyticsTrackers.configuration.use_deface
+  Deface::Override.new(
+    virtual_path: 'spree/orders/edit',
+    name: 'add_cart_viewed_to_orders_edit',
+    insert_bottom: '[data-hook="cart_container"]',
+    partial: 'spree/shared/trackers/segment/cart_viewed.js'
+  )
+end
