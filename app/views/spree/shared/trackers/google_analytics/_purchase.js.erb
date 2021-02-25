@@ -1,20 +1,22 @@
 <% if ga_enabled? && @order.present? && order_just_completed?(@order) %>
   <script>
-    if (typeof gtag !== 'undefined') {
-      clearGAplugins();
-      gtag('event', 'purchase', {
-        transaction_id: '<%= @order.number %>',
-        value: <%= @order.total %>,
-        currency: '<%= @order.currency %>',
-        tax: <%= @order.tax_total %>,
-        shipping: <%= @order.shipment_total %>,
-        coupon: '<%= @order.coupon_code %>',
-        items: [
-          <% @order.line_items.each do |line_item| %>
+    window.addEventListener('turbolinks:load', function() {
+      if (typeof gtag !== 'undefined') {
+        clearGAplugins();
+        gtag('event', 'purchase', {
+          transaction_id: '<%= @order.number %>',
+          value: <%= @order.total %>,
+          currency: '<%= @order.currency %>',
+          tax: <%= @order.tax_total %>,
+          shipping: <%= @order.shipment_total %>,
+          coupon: '<%= @order.coupon_code %>',
+          items: [
+            <% @order.line_items.each do |line_item| %>
             <%= ga_line_item(line_item) %>,
-          <% end %>
-        ]
-      });
-  }
+            <% end %>
+          ]
+        });
+      }
+    }, { once: true });
   </script>
 <% end %>

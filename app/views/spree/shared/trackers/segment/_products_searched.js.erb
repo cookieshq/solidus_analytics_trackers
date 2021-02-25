@@ -1,8 +1,10 @@
 <% if segment_enabled? && params.key?(:keywords) && params[:keywords].present? %>
   <script>
-    if (typeof analytics !== 'undefined') {
-      analytics.track('Products Searched', { query: '<%= params[:keywords] %>' });
-      analytics.page('Products Searched', { query: '<%= params[:keywords] %>' });
-    }
+    window.addEventListener('turbolinks:load', function() {
+      if (typeof analytics !== 'undefined') {
+        analytics.track('Products Searched', { query: '<%= params[:keywords] %>' });
+        analytics.page('Products Searched', { query: '<%= params[:keywords] %>' });
+      }
+    }, { once: true });
   </script>
 <% end %>

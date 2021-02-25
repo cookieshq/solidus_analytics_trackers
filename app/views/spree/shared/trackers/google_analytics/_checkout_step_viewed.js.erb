@@ -1,17 +1,19 @@
 <% if ga_enabled? && @order.present? && !@order.completed? %>
   <script>
-  if (typeof gtag !== 'undefined') {
-    clearGAplugins();
-    gtag('event', 'checkout_progress', {
-      checkout_step: '<%= (@order.checkout_steps.index(@order.state) + 1) %>',
-      items: [
-        <% @order.line_items.each do |line_item| %>
-          <%= ga_line_item(line_item) %>,
-        <% end %>
-      ],
-      coupon: '<%= @order.coupon_code %>',
-      checkout_option: '<%= @order.state %>'
-    });
-  };
+    window.addEventListener('turbolinks:load', function() {
+      if (typeof gtag !== 'undefined') {
+        clearGAplugins();
+        gtag('event', 'checkout_progress', {
+          checkout_step: '<%= (@order.checkout_steps.index(@order.state) + 1) %>',
+          items: [
+            <% @order.line_items.each do |line_item| %>
+              <%= ga_line_item(line_item) %>,
+            <% end %>
+          ],
+          coupon: '<%= @order.coupon_code %>',
+          checkout_option: '<%= @order.state %>'
+        });
+      };
+    }, { once: true });
   </script>
 <% end %>
