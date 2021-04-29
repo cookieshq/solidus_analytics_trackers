@@ -6,10 +6,10 @@
 
     <% if try_spree_current_user.id %>
       analytics.identify(<%= try_spree_current_user.id %>, {
-        name: <%= try_spree_current_user.full_name %>,
-        email: <%= try_spree_current_user.id %>,
+        name: '<%= try_spree_current_user.full_name %>',
+        email: '<%= try_spree_current_user.email %>',
       });
     <% end %>
-    
+
   </script>
 <% end %>
