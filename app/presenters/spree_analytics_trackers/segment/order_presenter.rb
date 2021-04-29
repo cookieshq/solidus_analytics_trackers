@@ -5,6 +5,7 @@ module SpreeAnalyticsTrackers
 
       def serialize_resource(resource, options = {})
         {
+          messageId: resource.number,
           order_id: resource.number,
           total: resource.total,
           shipping: resource.shipment_total,
